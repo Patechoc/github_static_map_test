@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Map</title>
+    <title>Carte des cantines de lutte (demo)</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -10,25 +10,49 @@
     </style>
 </head>
 <body>
-    <h1>Test Map</h1>
+    <h1>Carte des cantines de lutte (demo)</h1>
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        var map = L.map('map').setView([51.505, -0.09], 13);
+        var map = L.map('map').setView([46.603354, 1.888334], 6); // Center of France
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var canteens = [
-            { "name": "canteen 1", "lat": 51.505, "lng": -0.09 },
-            { "name": "canteen 2", "lat": 51.515, "lng": -0.10 },
-            // Add more restaurants here
+        var cantines = [
+            { "name": "Le Gourmet Parisien", "type": "Cantine Scolaire", "lat": 48.8566, "lng": 2.3522, "address": "123 Rue de Rivoli", "postcode": "75001", "city": "Paris", "website": "http://legourmetparisien.fr", "phone": "0102030405", "summary": "A popular school canteen in the heart of Paris, serving nutritious meals to students." },
+            { "name": "Bistro Lyonnais", "type": "Cantine de Luttes", "lat": 45.7640, "lng": 4.8357, "address": "456 Place Bellecour", "postcode": "69002", "city": "Lyon", "website": "http://bistrolyonnais.fr", "phone": "0102030406", "summary": "A cozy bistro in Lyon known for its hearty meals and welcoming atmosphere." },
+            { "name": "Chez Marseille", "type": "Cantine Scolaire", "lat": 43.2965, "lng": 5.3698, "address": "789 Boulevard Longchamp", "postcode": "13001", "city": "Marseille", "website": "http://chezmarseille.fr", "phone": "0102030407", "summary": "A canteen providing delicious and balanced meals to school children in Marseille." },
+            { "name": "Nantes Cuisine", "type": "Cantine de Luttes", "lat": 47.2184, "lng": -1.5536, "address": "321 Quai de la Fosse", "postcode": "44000", "city": "Nantes", "website": "http://nantescuisine.fr", "phone": "0102030408", "summary": "A canteen in Nantes famous for its local specialties and community spirit." },
+            { "name": "Bordeaux Bites", "type": "Cantine Scolaire", "lat": 44.8378, "lng": -0.5792, "address": "654 Cours de l'Intendance", "postcode": "33000", "city": "Bordeaux", "website": "http://bordeauxbites.fr", "phone": "0102030409", "summary": "A school canteen in Bordeaux known for its fresh and healthy meals." },
+            { "name": "Toulouse Treats", "type": "Cantine de Luttes", "lat": 43.6047, "lng": 1.4442, "address": "987 Rue Saint-Rome", "postcode": "31000", "city": "Toulouse", "website": "http://toulousetreats.fr", "phone": "0102030410", "summary": "A popular canteen in Toulouse offering a variety of delicious dishes." },
+            { "name": "Nice Nourriture", "type": "Cantine Scolaire", "lat": 43.7102, "lng": 7.2620, "address": "111 Promenade des Anglais", "postcode": "06000", "city": "Nice", "website": "http://nicenourriture.fr", "phone": "0102030411", "summary": "A school canteen in Nice that provides tasty and nutritious meals to students." },
+            { "name": "Strasbourg Snacks", "type": "Cantine de Luttes", "lat": 48.5734, "lng": 7.7521, "address": "222 Rue des Grandes Arcades", "postcode": "67000", "city": "Strasbourg", "website": "http://strasbourgsnacks.fr", "phone": "0102030412", "summary": "A canteen in Strasbourg known for its warm atmosphere and delicious food." },
+            { "name": "Lille Lunches", "type": "Cantine Scolaire", "lat": 50.6292, "lng": 3.0573, "address": "333 Rue de Béthune", "postcode": "59000", "city": "Lille", "website": "http://lillelunches.fr", "phone": "0102030413", "summary": "A school canteen in Lille serving a variety of healthy and tasty meals." },
+            { "name": "Rennes Repas", "type": "Cantine de Luttes", "lat": 48.1173, "lng": -1.6778, "address": "444 Rue Saint-Georges", "postcode": "35000", "city": "Rennes", "website": "http://rennesrepas.fr", "phone": "0102030414", "summary": "A canteen in Rennes offering a range of delicious and nutritious meals." },
+            { "name": "Reims Restaurant", "type": "Cantine Scolaire", "lat": 49.2583, "lng": 4.0317, "address": "555 Place Drouet d'Erlon", "postcode": "51100", "city": "Reims", "website": "http://reimsrestaurant.fr", "phone": "0102030415", "summary": "A school canteen in Reims providing balanced and tasty meals to students." },
+            { "name": "Le Havre Dining", "type": "Cantine de Luttes", "lat": 49.4944, "lng": 0.1079, "address": "666 Rue de Paris", "postcode": "76600", "city": "Le Havre", "website": "http://lehavredining.fr", "phone": "0102030416", "summary": "A canteen in Le Havre known for its welcoming atmosphere and delicious food." },
+            { "name": "Saint-Étienne Eats", "type": "Cantine Scolaire", "lat": 45.4397, "lng": 4.3872, "address": "777 Place Jean Jaurès", "postcode": "42000", "city": "Saint-Étienne", "website": "http://saintetienneeats.fr", "phone": "0102030417", "summary": "A school canteen in Saint-Étienne offering a variety of healthy meals." },
+            { "name": "Tours Table", "type": "Cantine de Luttes", "lat": 47.3941, "lng": 0.6848, "address": "888 Rue Nationale", "postcode": "37000", "city": "Tours", "website": "http://tourstable.fr", "phone": "0102030418", "summary": "A canteen in Tours providing delicious and nutritious meals." },
+            { "name": "Clermont Cuisine", "type": "Cantine Scolaire", "lat": 45.7772, "lng": 3.0870, "address": "999 Rue du Maréchal Foch", "postcode": "63000", "city": "Clermont-Ferrand", "website": "http://clermontcuisine.fr", "phone": "0102030419", "summary": "A school canteen in Clermont-Ferrand known for its healthy and tasty meals." },
+            { "name": "Montpellier Meals", "type": "Cantine de Luttes", "lat": 43.6119, "lng": 3.8772, "address": "101 Rue de la Loge", "postcode": "34000", "city": "Montpellier", "website": "http://montpelliermeals.fr", "phone": "0102030420", "summary": "A canteen in Montpellier offering a range of delicious and balanced meals." },
+            { "name": "Dijon Dining", "type": "Cantine Scolaire", "lat": 47.3220, "lng": 5.0415, "address": "102 Place de la Libération", "postcode": "21000", "city": "Dijon", "website": "http://dijondining.fr", "phone": "0102030421", "summary": "A school canteen in Dijon providing nutritious meals to students." },
+            { "name": "Angers Appetizers", "type": "Cantine de Luttes", "lat": 47.4784, "lng": -0.5632, "address": "103 Boulevard du Roi René", "postcode": "49000", "city": "Angers", "website": "http://angersappetizers.fr", "phone": "0102030422", "summary": "A canteen in Angers known for its delicious appetizers and warm atmosphere." },
+            { "name": "Grenoble Grub", "type": "Cantine Scolaire", "lat": 45.1885, "lng": 5.7245, "address": "104 Place Victor Hugo", "postcode": "38000", "city": "Grenoble", "website": "http://grenoblegrub.fr", "phone": "0102030423", "summary": "A school canteen in Grenoble offering a variety of healthy and tasty meals." },
+            { "name": "Nîmes Nourishment", "type": "Cantine de Luttes", "lat": 43.8386, "lng": 4.3601, "address": "105 Avenue Jean Jaurès", "postcode": "30000", "city": "Nîmes", "website": "http://nimesnourishment.fr", "phone": "0102030424", "summary": "A canteen in Nîmes known for its nutritious meals and welcoming atmosphere." }
         ];
 
-        canteens.forEach(function(resto) {
-            L.marker([resto.lat, resto.lng]).addTo(map)
-                .bindPopup('<b>' + resto.name + '</b>');
+        cantines.forEach(function(cantine) {
+            var popupContent = '<b>' + cantine.name + '</b><br>' +
+                'Type: ' + cantine.type + '<br>' +
+                'Address: ' + cantine.address + ', ' + cantine.postcode + ' ' + cantine.city + '<br>' +
+                'Website: <a href="' + cantine.website + '" target="_blank">' + cantine.website + '</a><br>' +
+                'Phone: ' + cantine.phone + '<br>' +
+                '<p>' + cantine.summary + '</p>';
+
+            L.marker([cantine.lat, cantine.lng]).addTo(map)
+                .bindPopup(popupContent);
         });
     </script>
 </body>
