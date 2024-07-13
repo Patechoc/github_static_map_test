@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <style>
         #map { height: 600px; width: 100%; }
         .legend { background: white; padding: 10px; }
@@ -18,6 +20,7 @@
         <input type="checkbox" id="toggleProducers" checked> Producteurs Alimentaires
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script>
         var map = L.map('map').setView([46.603354, 1.888334], 6); // Center of France
 
@@ -71,8 +74,8 @@
             { "name": "Nîmes Production", "type": "Producteur", "lat": 43.8387, "lng": 4.3600, "address": "20 Avenue de la Production", "postcode": "30000", "city": "Nîmes", "website": "http://nimesproduction.fr", "phone": "0102030524", "summary": "Producers in Nîmes offering a variety of fresh and organic products." }
         ];
 
-        var cantineLayer = L.layerGroup();
-        var producerLayer = L.layerGroup();
+        var cantineLayer = L.markerClusterGroup();
+        var producerLayer = L.markerClusterGroup();
 
         cantines.forEach(function(cantine) {
             var popupContent = '<b>' + cantine.name + '</b><br>' +
