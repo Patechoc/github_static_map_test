@@ -8,12 +8,28 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
     <style>
-        #map { height: 600px; width: 100%; }
-        .legend { background: white; padding: 10px; }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 1000; /* Ensure the legend is above other elements */
+        }
     </style>
 </head>
 <body>
-    <h1>Carte des cantines de lutte et des producteurs alimentaires (demo)</h1>
     <div id="map"></div>
     <div id="legend" class="legend">
         <input type="checkbox" id="toggleCanteens" checked> Cantines<br>
