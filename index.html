@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Carte des cantines de lutte et des producteurs alimentaires (demo)</title>
+    <title>Réseaux Salariat</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -32,8 +32,8 @@
 <body>
     <div id="map"></div>
     <div id="legend" class="legend">
-        <input type="checkbox" id="toggleCanteens" checked> Cantines<br>
-        <input type="checkbox" id="toggleProducers" checked> Producteurs Alimentaires
+        <input type="checkbox" id="toggleGL" checked> Groupe locaux<br>
+        <input type="checkbox" id="toggleSSA" checked> Initiatives locales SSA
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
@@ -45,49 +45,49 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var cantineLayer = L.markerClusterGroup();
-        var producerLayer = L.markerClusterGroup();
+        var groupesLayer = L.markerClusterGroup();
+        var initiativesLayer = L.markerClusterGroup();
 
-        cantines.forEach(function(cantine) {
-            var popupContent = '<b>' + cantine.name + '</b><br>' +
-                'Type: ' + cantine.type + '<br>' +
-                'Address: ' + cantine.address + ', ' + cantine.postcode + ' ' + cantine.city + '<br>' +
-                'Website: <a href="' + cantine.website + '" target="_blank">' + cantine.website + '</a><br>' +
-                'Phone: ' + cantine.phone + '<br>' +
-                '<p>' + cantine.summary + '</p>';
+        groupes_locaux.forEach(function(gl) {
+            var popupContent = '<b>' + gl.name + '</b><br>' +
+                'Type: ' + gl.type + '<br>' +
+                'Address: ' + gl.address + ', ' + gl.postcode + ' ' + gl.city + '<br>' +
+                'Website: <a href="' + gl.website + '" target="_blank">' + gl.website + '</a><br>' +
+                'Phone: ' + gl.phone + '<br>' +
+                '<p>' + gl.summary + '</p>';
 
-            L.marker([cantine.lat, cantine.lng]).addTo(cantineLayer)
+            L.marker([gl.lat, gl.lng]).addTo(groupesLayer)
                 .bindPopup(popupContent);
         });
 
-        producers.forEach(function(producer) {
-            var popupContent = '<b>' + producer.name + '</b><br>' +
-                'Type: ' + producer.type + '<br>' +
-                'Address: ' + producer.address + ', ' + producer.postcode + ' ' + producer.city + '<br>' +
-                'Website: <a href="' + producer.website + '" target="_blank">' + producer.website + '</a><br>' +
-                'Phone: ' + producer.phone + '<br>' +
-                '<p>' + producer.summary + '</p>';
+        initiatives_ssa.forEach(function(ssa) {
+            var popupContent = '<b>' + ssa.name + '</b><br>' +
+                'Type: ' + ssa.type + '<br>' +
+                'Address: ' + ssa.address + ', ' + ssa.postcode + ' ' + ssa.city + '<br>' +
+                'Website: <a href="' + ssa.website + '" target="_blank">' + ssa.website + '</a><br>' +
+                'Phone: ' + ssa.phone + '<br>' +
+                '<p>' + ssa.summary + '</p>';
 
-            L.marker([producer.lat, producer.lng]).addTo(producerLayer)
+            L.marker([ssa.lat, ssa.lng]).addTo(initiativesLayer)
                 .bindPopup(popupContent);
         });
 
-        cantineLayer.addTo(map);
-        producerLayer.addTo(map);
+        groupesLayer.addTo(map);
+        initiativesLayer.addTo(map);
 
-        document.getElementById('toggleCanteens').addEventListener('change', function(e) {
+        document.getElementById('toggleGL').addEventListener('change', function(e) {
             if (this.checked) {
-                map.addLayer(cantineLayer);
+                map.addLayer(groupesLayer);
             } else {
-                map.removeLayer(cantineLayer);
+                map.removeLayer(groupesLayer);
             }
         });
 
-        document.getElementById('toggleProducers').addEventListener('change', function(e) {
+        document.getElementById('toggleSSA').addEventListener('change', function(e) {
             if (this.checked) {
-                map.addLayer(producerLayer);
+                map.addLayer(initiativesLayer);
             } else {
-                map.removeLayer(producerLayer);
+                map.removeLayer(initiativesLayer);
             }
         });
     </script>
