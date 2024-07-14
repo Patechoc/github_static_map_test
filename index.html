@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Réseaux Salariat </title>
+    <title>Réseaux Salariat</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -48,6 +48,13 @@
         var groupesLayer = L.markerClusterGroup();
         var initiativesLayer = L.markerClusterGroup();
 
+        var customIcon = L.icon({
+            iconUrl: 'static/images/icon_rs.png', // Update this path to your custom icon
+            iconSize: [32, 32], // Size of the icon
+            iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location
+            popupAnchor: [0, -32] // Point from which the popup should open relative to the iconAnchor
+        });
+
         groupes_locaux.forEach(function(gl) {
             var popupContent = '<b>' + gl.name + '</b><br>' +
                 'Type: ' + gl.type + '<br>' +
@@ -56,7 +63,7 @@
                 'Phone: ' + gl.phone + '<br>' +
                 '<p>' + gl.summary + '</p>';
 
-            L.marker([gl.lat, gl.lng]).addTo(groupesLayer)
+            L.marker([gl.lat, gl.lng], { icon: customIcon }).addTo(groupesLayer)
                 .bindPopup(popupContent);
         });
 
