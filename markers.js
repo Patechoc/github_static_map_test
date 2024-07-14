@@ -41,4 +41,5 @@ var groupes_locaux = [
     { "name": "Groupe Local Vienne", "type": "Groupe Local", "lat": 46.5802, "lng": 0.3404, "address": "Vienne", "postcode": "", "city": "", "website": "", "phone": "", "email": "adherents-vienne@lists.reseau-salariat.info", "summary": "Groupe local pour la Vienne." },
 ];
 
+// https://securite-sociale-alimentation.org/les-dynamiques-locales/carte-des-initiatives-locales-de-la-ssa/
 var initiatives_ssa = [];
