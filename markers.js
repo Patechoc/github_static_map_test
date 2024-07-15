@@ -42,4 +42,21 @@ var groupes_locaux = [
 ];
 
 // https://securite-sociale-alimentation.org/les-dynamiques-locales/carte-des-initiatives-locales-de-la-ssa/
-var initiatives_ssa = [];
+var initiatives_ssa = [
+    { "name": "Collectif Acclimat’action",
+      "type": "initiative SSA",
+      "Structures porteuses": ["Vrac Bordeaux","les râteleurs","supercoop","capsciences","CeDS","Du vert dans les rouages","e-graine","L'estey","Moisa et MIAM - acteurs issus de l’éducation populaire de l’économie sociale et solidaire du travail social ou de la recherche scientifique"],
+      "Territoire d’expérimentation": "Bordeaux métropole et pays foyen",
+      "Partenaires": ["l’ADEME", "la Région Nouvelle Aquitaine", "la Fondation Carasso", "la Fondation Européenne pour le Climat", "Bordeaux Métropole", "le Conseil Départemental de Gironde et la Ville de Bordeaux"],
+      "lat": 44.8775859,
+      "lng": -0.5717582,
+      "address": "Av. André Reinson",
+      "postcode": "33300",
+      "city": "Bordeaux",
+      "website": "",
+      "phone": "",
+      "email": "",
+      "summary": "Pour réfléchir et expérimenter dans les quartiers populaires",
+      "URLs": ["https://www.acclimataction.fr/", "https://securite-sociale-alimentation.org/initiative/collectif-acclimataction-pour-reflechir-et-experimenter-dans-les-quartiers-populaires/"],
+    },
+];

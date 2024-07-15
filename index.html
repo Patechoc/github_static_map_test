@@ -48,9 +48,16 @@
         var groupesLayer = L.markerClusterGroup();
         var initiativesLayer = L.markerClusterGroup();
 
-        var customIcon = L.icon({
+        var customIconGL = L.icon({
             iconUrl: 'static/images/icon_rs.png', // Update this path to your custom icon
             iconSize: [32, 32], // Size of the icon
+            iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location
+            popupAnchor: [0, -32] // Point from which the popup should open relative to the iconAnchor
+        });
+
+        var customIconSSA = L.icon({
+            iconUrl: 'static/images/icon_ssa.png', // Update this path to your custom icon
+            iconSize: [58, 32], // Size of the icon
             iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location
             popupAnchor: [0, -32] // Point from which the popup should open relative to the iconAnchor
         });
@@ -63,7 +70,7 @@
                 'Phone: ' + gl.phone + '<br>' +
                 '<p>' + gl.summary + '</p>';
 
-            L.marker([gl.lat, gl.lng], { icon: customIcon }).addTo(groupesLayer)
+            L.marker([gl.lat, gl.lng], { icon: customIconGL }).addTo(groupesLayer)
                 .bindPopup(popupContent);
         });
 
@@ -71,11 +78,15 @@
             var popupContent = '<b>' + ssa.name + '</b><br>' +
                 'Type: ' + ssa.type + '<br>' +
                 'Address: ' + ssa.address + ', ' + ssa.postcode + ' ' + ssa.city + '<br>' +
+                'Territoire d’expérimentation: ' + ssa["Territoire d’expérimentation"] + '<br>' +
+                'Structures porteuses: ' + ssa["Structures porteuses"].join(", ") + '<br>' +
+                'Partenaires: ' + ssa.Partenaires.join(", ") + '<br>' +
                 'Website: <a href="' + ssa.website + '" target="_blank">' + ssa.website + '</a><br>' +
                 'Phone: ' + ssa.phone + '<br>' +
-                '<p>' + ssa.summary + '</p>';
+                '<p>' + ssa.summary + '</p>' +
+                'URLs: ' + ssa.URLs.map(url => '<a href="' + url + '" target="_blank">' + url + '</a>').join(", ");
 
-            L.marker([ssa.lat, ssa.lng]).addTo(initiativesLayer)
+            L.marker([ssa.lat, ssa.lng], { icon: customIconSSA }).addTo(initiativesLayer)
                 .bindPopup(popupContent);
         });
 
