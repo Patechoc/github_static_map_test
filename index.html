@@ -64,10 +64,10 @@
 
         groupes_locaux.forEach(function(gl) {
             var popupContent = '<b>' + gl.name + '</b><br>' +
-                'Type: ' + gl.type + '<br>' +
-                'Address: ' + gl.address + ', ' + gl.postcode + ' ' + gl.city + '<br>' +
-                'Website: <a href="' + gl.website + '" target="_blank">' + gl.website + '</a><br>' +
-                'Phone: ' + gl.phone + '<br>' +
+                '<b>Type:</b> ' + gl.type + '<br>' +
+                '<b>Address:</b> ' + gl.address + ', ' + gl.postcode + ' ' + gl.city + '<br>' +
+                '<b>Website:</b> <a href="' + gl.website + '" target="_blank">' + gl.website + '</a><br>' +
+                '<b>Phone:</b> ' + gl.phone + '<br>' +
                 '<p>' + gl.summary + '</p>';
 
             L.marker([gl.lat, gl.lng], { icon: customIconGL }).addTo(groupesLayer)
@@ -76,15 +76,15 @@
 
         initiatives_ssa.forEach(function(ssa) {
             var popupContent = '<b>' + ssa.name + '</b><br>' +
-                'Type: ' + ssa.type + '<br>' +
-                'Address: ' + ssa.address + ', ' + ssa.postcode + ' ' + ssa.city + '<br>' +
-                'Territoire d’expérimentation: ' + ssa["Territoire d’expérimentation"] + '<br>' +
-                'Structures porteuses: ' + ssa["Structures porteuses"].join(", ") + '<br>' +
-                'Partenaires: ' + ssa.Partenaires.join(", ") + '<br>' +
-                'Website: <a href="' + ssa.website + '" target="_blank">' + ssa.website + '</a><br>' +
-                'Phone: ' + ssa.phone + '<br>' +
-                '<p>' + ssa.summary + '</p>' +
-                'URLs: ' + ssa.URLs.map(url => '<a href="' + url + '" target="_blank">' + url + '</a>').join(", ");
+            '<b>Type:</b> ' + ssa.type + '<br>' +
+            '<b>Address:</b> ' + ssa.address + ', ' + ssa.postcode + ' ' + ssa.city + '<br>' +
+            '<b>Territoire d’expérimentation:</b> ' + ssa["Territoire d’expérimentation"] + '<br>' +
+            '<b>Structures porteuses:</b> ' + ssa["Structures porteuses"].join(", ") + '<br>' +
+            '<b>Partenaires:</b> ' + ssa.Partenaires.join(", ") + '<br>' +
+            '<b>Website:</b> <a href="' + ssa.website + '" target="_blank">' + ssa.website + '</a><br>' +
+            '<b>Phone:</b> ' + ssa.phone + '<br>' +
+            '<p>' + ssa.summary + '</p>' +
+            '<b>URLs:</b><ul>' + ssa.URLs.map(url => '<li><a href="' + url + '" target="_blank">' + url + '</a></li>').join("") + '</ul>';
 
             L.marker([ssa.lat, ssa.lng], { icon: customIconSSA }).addTo(initiativesLayer)
                 .bindPopup(popupContent);
