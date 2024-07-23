@@ -90,6 +90,7 @@ ere's how we can do it:
 Run the following command to build the project into a static site:
 
 ```shell
+cd my-svelte-map
 npm run build
 ```
 
@@ -118,11 +119,12 @@ serve -s dist
 1. Create a gh-pages branch:
 
 ```shell
+git branch -D gh-pages
 git checkout --orphan gh-pages
 git reset --hard
 git commit --allow-empty -m "Initializing gh-pages branch"
-git push origin gh-pages
-git checkout main
+git push origin gh-pages -f 
+git switch main
 ```
 
 1. Install gh-pages package:
