@@ -35,6 +35,8 @@ Install Leaflet and Svelte components for Leaflet.
 
 ```shell
 npm install leaflet svelte-leaflet
+npm install leaflet.markercluster
+npm i --save-dev @types/leaflet
 ```
 
 # Step 3: Create the Svelte Component for the Map
@@ -52,3 +54,23 @@ Update the App.svelte file to use the Map component.
 
 ```shell
 touch src/App.svelte
+```
+
+# Step 5: Add the Markers Data
+
+Copy the former markers.js file in the src directory and move your markers data into it.
+    
+
+# tep 6: Update Icons Paths and Style
+
+Update the paths to your custom icons in Map.svelte and ensure the icons are placed in the correct directory.
+
+# Step 7: Run the Project
+
+Run the Svelte project using the following command:
+
+```shell
+npm run dev
+```
+
+Now we have a more complex Svelte-based project with a map displaying markers and filters based on the input data. we can further enhance it by adding more filters and interactions as per your requirements.
