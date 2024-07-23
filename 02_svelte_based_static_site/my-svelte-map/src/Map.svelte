@@ -42,6 +42,8 @@
         popupAnchor: [0, -32]
       });
   
+      const booleanIcon = (value: boolean) => value ? '<i class="fas fa-check-circle" style="color:green"></i>' : '<i class="fas fa-times-circle" style="color:red"></i>';
+  
       groupes_locaux.forEach(gl => {
         const popupContent = `<b>${gl.name}</b><br>
                   <b>Type:</b> ${gl.type}<br>
@@ -63,7 +65,30 @@
                   <b>Website:</b> <a href="${ssa.website}" target="_blank">${ssa.website}</a><br>
                   <b>Phone:</b> ${ssa.phone}<br>
                   <p>${ssa.summary}</p>
-                  <b>URLs:</b><ul>${ssa.URLs.map(url => `<li><a href="${url}" target="_blank">${url}</a></li>`).join("")}</ul>`;
+                  <b>URLs:</b><ul>${ssa.URLs.map(url => `<li><a href="${url}" target="_blank">${url}</a></li>`).join("")}</ul>
+                  <b>Conventionnement:</b><br>
+                  <b>Principes et Objectifs:</b><br>
+                  Accès à une alimentation saine: ${booleanIcon(ssa.conventionnement.principes_et_objectifs.accès_à_une_alimentation_saine)}<br>
+                  Production locale durable: ${booleanIcon(ssa.conventionnement.principes_et_objectifs.production_locale_durable)}<br>
+                  Justice sociale: ${booleanIcon(ssa.conventionnement.principes_et_objectifs.justice_sociale)}<br>
+                  <b>Producteurs:</b><ul>${ssa.conventionnement.producteurs.map(prod => `<li>${prod.name}, Pratiques durables: ${booleanIcon(prod.pratiques_durables)}, Rémunération équitable: ${booleanIcon(prod.rémunération_équitable)}, Certifié: ${booleanIcon(prod.certifié)}</li>`).join("")}</ul>
+                  <b>Distributeurs:</b><ul>${ssa.conventionnement.distributeurs.map(dist => `<li>${dist.name}, Transparence des prix: ${booleanIcon(dist.transparence_des_prix)}, Soutien aux producteurs locaux: ${booleanIcon(dist.soutien_aux_producteurs_locaux)}</li>`).join("")}</ul>
+                  <b>Consommateurs:</b><br>
+                  Participation active: ${booleanIcon(ssa.conventionnement.consommateurs.participation_active)}<br>
+                  Ateliers: ${booleanIcon(ssa.conventionnement.consommateurs.ateliers)}<br>
+                  Conférences: ${booleanIcon(ssa.conventionnement.consommateurs.conférences)}<br>
+                  <b>Soutien des autorités locales:</b><br>
+                  Subventions: ${booleanIcon(ssa.conventionnement.soutien_des_autorités_locales.subventions)}<br>
+                  Soutien en infrastructure: ${booleanIcon(ssa.conventionnement.soutien_des_autorités_locales.soutien_en_infrastructure)}<br>
+                  Promotion: ${booleanIcon(ssa.conventionnement.soutien_des_autorités_locales.promotion)}<br>
+                  <b>Suivi et évaluation:</b><br>
+                  Indicateurs de santé publique: ${booleanIcon(ssa.conventionnement.suivi_et_évaluation.indicateurs_de_santé_publique)}<br>
+                  Satisfaction des consommateurs: ${booleanIcon(ssa.conventionnement.suivi_et_évaluation.satisfaction_des_consommateurs)}<br>
+                  Viabilité économique des producteurs: ${booleanIcon(ssa.conventionnement.suivi_et_évaluation.viabilité_économique_des_producteurs)}<br>
+                  <b>Adaptation et évolution:</b><br>
+                  Mécanismes de rétroaction: ${booleanIcon(ssa.conventionnement.adaptation_et_évolution.mécanismes_de_rétroaction)}<br>
+                  Adaptation au changement climatique: ${booleanIcon(ssa.conventionnement.adaptation_et_évolution.adaptation_au_changement_climatique)}<br>
+                  Adaptation aux changements économiques: ${booleanIcon(ssa.conventionnement.adaptation_et_évolution.adaptation_aux_changements_économiques)}<br>`;
         L.marker([ssa.lat, ssa.lng], { icon: customIconSSA }).addTo(initiativesLayer)
           .bindPopup(popupContent);
       });
