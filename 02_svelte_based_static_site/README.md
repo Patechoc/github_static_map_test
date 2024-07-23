@@ -37,6 +37,7 @@ Install Leaflet and Svelte components for Leaflet.
 npm install leaflet svelte-leaflet
 npm install leaflet.markercluster
 npm i --save-dev @types/leaflet
+npm install js-yaml
 ```
 
 # Step 3: Create the Svelte Component for the Map
