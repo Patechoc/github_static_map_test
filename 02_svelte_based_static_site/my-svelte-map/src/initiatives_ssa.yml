@@ -30,6 +30,43 @@
   URLs:
     - https://www.acclimataction.fr/
     - https://securite-sociale-alimentation.org/initiative/collectif-acclimataction-pour-reflechir-et-experimenter-dans-les-quartiers-populaires/
+  conventionnement:
+    principes_et_objectifs:
+      accès_à_une_alimentation_saine: true
+      production_locale_durable: true
+      justice_sociale: true
+    producteurs:
+      - name: "Ferme Bio de Gégé"
+        pratiques_durables: true
+        rémunération_équitable: true
+        certifié: true
+      - name: "Producteur de Légumes Locaux"
+        pratiques_durables: true
+        rémunération_équitable: true
+        certifié: false
+    distributeurs:
+      - name: "Marché de Moss"
+        transparence_des_prix: true
+        soutien_aux_producteurs_locaux: true
+      - name: "Coopérative Bio"
+        transparence_des_prix: true
+        soutien_aux_producteurs_locaux: true
+    consommateurs:
+      participation_active: true
+      ateliers: true
+      conférences: false
+    soutien_des_autorités_locales:
+      subventions: true
+      soutien_en_infrastructure: true
+      promotion: true
+    suivi_et_évaluation:
+      indicateurs_de_santé_publique: true
+      satisfaction_des_consommateurs: true
+      viabilité_économique_des_producteurs: true
+    adaptation_et_évolution:
+      mécanismes_de_rétroaction: true
+      adaptation_au_changement_climatique: true
+      adaptation_aux_changements_économiques: true
 
 - name: Caisse commune de l’alimentation Montpellier
   type: initiative SSA
@@ -53,6 +90,43 @@
   summary: Un collectif informel de 25 organisations mobilisé pour monter une expérimentation autour de la démocratie alimentaire.
   URLs:
     - https://tav-montpellier.xyz/?Experimentation
+  conventionnement:
+    principes_et_objectifs:
+      accès_à_une_alimentation_saine: true
+      production_locale_durable: true
+      justice_sociale: true
+    producteurs:
+      - name: "Ferme Bio de Gégé"
+        pratiques_durables: true
+        rémunération_équitable: true
+        certifié: true
+      - name: "Producteur de Légumes Locaux"
+        pratiques_durables: true
+        rémunération_équitable: true
+        certifié: false
+    distributeurs:
+      - name: "Marché de Moss"
+        transparence_des_prix: true
+        soutien_aux_producteurs_locaux: true
+      - name: "Coopérative Bio"
+        transparence_des_prix: true
+        soutien_aux_producteurs_locaux: true
+    consommateurs:
+      participation_active: true
+      ateliers: true
+      conférences: false
+    soutien_des_autorités_locales:
+      subventions: true
+      soutien_en_infrastructure: true
+      promotion: true
+    suivi_et_évaluation:
+      indicateurs_de_santé_publique: true
+      satisfaction_des_consommateurs: true
+      viabilité_économique_des_producteurs: true
+    adaptation_et_évolution:
+      mécanismes_de_rétroaction: true
+      adaptation_au_changement_climatique: true
+      adaptation_aux_changements_économiques: true
 
 - name: Collectif SSA 35
   type: initiative SSA
@@ -76,3 +150,40 @@
   email: collectif-ssa35@protonmail.com
   summary: Le Collectif SSA 35 mène différentes actions pour faire connaître la proposition politique au grand public et mobiliser pour la création de la SSA.
   URLs: []
+  conventionnement:
+    principes_et_objectifs:
+      accès_à_une_alimentation_saine: true
+      production_locale_durable: true
+      justice_sociale: true
+    producteurs:
+      - name: "Ferme Bio de Gégé"
+        pratiques_durables: true
+        rémunération_équitable: true
+        certifié: true
+      - name: "Producteur de Légumes Locaux"
+        pratiques_durables: true
+        rémunération_équitable: true
+        certifié: false
+    distributeurs:
+      - name: "Marché de Moss"
+        transparence_des_prix: true
+        soutien_aux_producteurs_locaux: true
+      - name: "Coopérative Bio"
+        transparence_des_prix: true
+        soutien_aux_producteurs_locaux: true
+    consommateurs:
+      participation_active: true
+      ateliers: true
+      conférences: false
+    soutien_des_autorités_locales:
+      subventions: true
+      soutien_en_infrastructure: true
+      promotion: true
+    suivi_et_évaluation:
+      indicateurs_de_santé_publique: true
+      satisfaction_des_consommateurs: true
+      viabilité_économique_des_producteurs: true
+    adaptation_et_évolution:
+      mécanismes_de_rétroaction: true
+      adaptation_au_changement_climatique: true
+      adaptation_aux_changements_économiques: true
