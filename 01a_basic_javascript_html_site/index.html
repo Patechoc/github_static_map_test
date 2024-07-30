@@ -44,15 +44,6 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             z-index: 1000;
             max-width: 300px;
-            animation: blink-animation 1s steps(1, start) infinite;
-        }
-        @keyframes blink-animation {
-            0%, 95% {
-                visibility: visible;
-            }
-            96%, 100% {
-                visibility: hidden;
-            }
         }
         .popup-name {
             font-family: 'Comic Neue', sans-serif;
@@ -70,7 +61,7 @@
         <img src="static/images/icon_ssa.png" alt="Initiatives locales SSA" style="vertical-align:middle; width:58px; height:32px;">
     </div>
     <div id="map-warning" class="map-warning">
-        <p><strong>Note :</strong> Pour voir les détails des clusters de marqueurs, veuillez zoomer sur la carte.</p>
+        <p><strong>Note :</strong> Veuillez zoomer sur la carte et cliquer sur les marqueurs pour plus d'info.</p>
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
