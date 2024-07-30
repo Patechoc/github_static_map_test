@@ -32,12 +32,16 @@
 <body>
     <div id="map"></div>
     <div id="legend" class="legend">
-        <input type="checkbox" id="toggleGL" checked> Groupe locaux<br>
+        <img src="static/images/icon_rs.png" alt="Groupe locaux" style="vertical-align:middle; width:32px; height:32px;">
+        <input type="checkbox" id="toggleGL" checked> Groupes locaux<br>
+        <img src="static/images/icon_ssa.png" alt="Initiatives locales SSA" style="vertical-align:middle; width:32px; height:32px;">
         <input type="checkbox" id="toggleSSA" checked> Initiatives locales SSA
     </div>
+    
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-    <script src="markers.js"></script>
+    <script src="groupes_locaux.js"></script>
+    <script src="initiatives_ssa.js"></script>
     <script>
         var map = L.map('map').setView([46.603354, 1.888334], 6); // Center of France
 
