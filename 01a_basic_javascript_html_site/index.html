@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
     <style>
         html, body {
             height: 100%;
@@ -37,7 +38,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255, 255, 204, 0.9); /* Light yellow background */
+            background: rgba(255, 241, 204, 0.9);
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
@@ -45,14 +46,18 @@
             max-width: 300px;
             animation: blink-animation 1s steps(1, start) infinite;
         }
-
         @keyframes blink-animation {
-            0%, 75% {
+            0%, 95% {
                 visibility: visible;
             }
-            76%, 100% {
+            96%, 100% {
                 visibility: hidden;
             }
+        }
+        .popup-name {
+            font-family: 'Comic Neue', sans-serif;
+            font-size: 1.6em;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -65,7 +70,7 @@
         <img src="static/images/icon_ssa.png" alt="Initiatives locales SSA" style="vertical-align:middle; width:58px; height:32px;">
     </div>
     <div id="map-warning" class="map-warning">
-        <p><strong>Note:</strong> Pour voir les détails des clusters, veuillez zoomer sur la carte.</p>
+        <p><strong>Note :</strong> Pour voir les détails des clusters de marqueurs, veuillez zoomer sur la carte.</p>
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
@@ -118,14 +123,14 @@
 
         // Create marker cluster groups with the custom icon creation function
         var groupesLayer = L.markerClusterGroup({
-            spiderfyOnMaxZoom: false,
+            spiderfyOnMaxZoom: true,
             showCoverageOnHover: true,
             zoomToBoundsOnClick: true,
             iconCreateFunction: createCustomClusterIcon
         });
 
         var initiativesLayer = L.markerClusterGroup({
-            spiderfyOnMaxZoom: false,
+            spiderfyOnMaxZoom: true,
             showCoverageOnHover: true,
             zoomToBoundsOnClick: true,
             iconCreateFunction: createCustomClusterIcon
@@ -148,30 +153,32 @@
 
         // Add markers for "Groupes locaux"
         groupes_locaux.forEach(function(gl) {
-            var popupContent = '<b>' + gl.name + '</b><br>' +
+            var popupContent = '<span class="popup-name">' + gl.name + '</span><br>' +
                 '<b>Type:</b> ' + gl.type + '<br>' +
-                '<b>Address:</b> ' + gl.address + ', ' + gl.postcode + ' ' + gl.city + '<br>' +
-                '<b>Website:</b> <a href="' + gl.website + '" target="_blank">' + gl.website + '</a><br>' +
-                '<b>Phone:</b> ' + gl.phone + '<br>' +
+                '<b>Addresse:</b> ' + gl.address + ', ' + gl.postcode + ' ' + gl.city + '<br>' +
+                '<b>🌐</b> <a href="' + gl.website + '" target="_blank">' + gl.website + '</a><br>' +
+                '<b>☎️</b> ' + gl.phone + '<br>' +
+                '<b>📧</b> <a href="mailto:' + gl.email + '">' + gl.email + '</a><br>' +
                 '<p>' + gl.summary + '</p>';
-
+        
             L.marker([gl.lat, gl.lng], { icon: customIconGL }).addTo(groupesLayer)
                 .bindPopup(popupContent);
         });
 
         // Add markers for "Initiatives locales SSA"
         initiatives_ssa.forEach(function(ssa) {
-            var popupContent = '<b>' + ssa.name + '</b><br>' +
-            '<b>Type:</b> ' + ssa.type + '<br>' +
-            '<b>Address:</b> ' + ssa.address + ', ' + ssa.postcode + ' ' + ssa.city + '<br>' +
-            '<b>Territoire d’expérimentation:</b> ' + ssa["Territoire d’expérimentation"] + '<br>' +
-            '<b>Structures porteuses:</b> ' + ssa["Structures porteuses"].join(", ") + '<br>' +
-            '<b>Partenaires:</b> ' + ssa.Partenaires.join(", ") + '<br>' +
-            '<b>Website:</b> <a href="' + ssa.website + '" target="_blank">' + ssa.website + '</a><br>' +
-            '<b>Phone:</b> ' + ssa.phone + '<br>' +
-            '<p>' + ssa.summary + '</p>' +
-            '<b>URLs:</b><ul>' + ssa.URLs.map(url => '<li><a href="' + url + '" target="_blank">' + url + '</a></li>').join("") + '</ul>';
-
+            var popupContent = '<span class="popup-name">' + ssa.name + '</span><br>' +
+                '<b>Type:</b> ' + ssa.type + '<br>' +
+                '<b>Addresse:</b> ' + ssa.address + ', ' + ssa.postcode + ' ' + ssa.city + '<br>' +
+                '<b>Territoire d’expérimentation:</b> ' + ssa["Territoire d’expérimentation"] + '<br>' +
+                '<b>Structures porteuses:</b> ' + ssa["Structures porteuses"].join(", ") + '<br>' +
+                '<b>Partenaires:</b> ' + ssa.Partenaires.join(", ") + '<br>' +
+                '<b>🌐</b> <a href="' + ssa.website + '" target="_blank">' + ssa.website + '</a><br>' +
+                '<b>☎️</b> ' + ssa.phone + '<br>' +
+                '<b>📧</b> <a href="mailto:' + ssa.email + '">' + ssa.email + '</a><br>' +
+                '<p>' + ssa.summary + '</p>' +
+                '<b>En savoir plus...</b><ul>' + ssa.URLs.map(url => '<li><a href="' + url + '" target="_blank">' + url + '</a></li>').join("") + '</ul>';
+        
             L.marker([ssa.lat, ssa.lng], { icon: customIconSSA }).addTo(initiativesLayer)
                 .bindPopup(popupContent);
         });
