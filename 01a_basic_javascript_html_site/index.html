@@ -25,7 +25,7 @@
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            z-index: 1000; /* Ensure the legend is above other elements */
+            z-index: 1000;
         }
         .custom-cluster-icon {
             position: relative;
@@ -33,16 +33,39 @@
             justify-content: center;
             align-items: center;
         }
+        .map-warning {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 204, 0.9); /* Light yellow background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 300px;
+            animation: blink-animation 1s steps(1, start) infinite;
+        }
+
+        @keyframes blink-animation {
+            0%, 75% {
+                visibility: visible;
+            }
+            76%, 100% {
+                visibility: hidden;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="map"></div>
     <div id="legend" class="legend">
-        
         <input type="checkbox" id="toggleGL" checked> Groupes locaux <img src="static/images/icon_rs.png" alt="Groupe locaux" style="vertical-align:middle; width:32px; height:32px;">
         <br>
         <input type="checkbox" id="toggleSSA" checked> Initiatives locales SSA
         <img src="static/images/icon_ssa.png" alt="Initiatives locales SSA" style="vertical-align:middle; width:58px; height:32px;">
+    </div>
+    <div id="map-warning" class="map-warning">
+        <p><strong>Note:</strong> Pour voir les détails des clusters, veuillez zoomer sur la carte.</p>
     </div>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
@@ -51,22 +74,22 @@
     <script>
         // Initialize the map
         var map = L.map('map').setView([46.603354, 1.888334], 6); // Center of France
-    
+
         // Add the base map layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-    
+
         // Function to create a custom cluster icon
         function createCustomClusterIcon(cluster) {
             var markers = cluster.getAllChildMarkers();
             var n = cluster.getChildCount();
-            
+
             // Determine the majority marker type in the cluster
             var iconType = 'rs'; // Default icon type
             var glCount = 0;
             var ssaCount = 0;
-            
+
             markers.forEach(function(marker) {
                 if (marker.options.icon.options.iconUrl.includes('icon_rs.png')) {
                     glCount++;
@@ -74,14 +97,14 @@
                     ssaCount++;
                 }
             });
-    
+
             if (ssaCount > glCount) {
                 iconType = 'ssa';
             }
-    
+
             var iconUrl = (iconType === 'ssa') ? 'static/images/icon_ssa.png' : 'static/images/icon_rs.png';
             var iconSize = (iconType === 'ssa') ? [58, 32] : [32, 32];
-            
+
             // Create the cluster icon
             var icon = L.divIcon({
                 html: `<img src="${iconUrl}" style="width:${iconSize[0]}px; height:${iconSize[1]}px; vertical-align: middle;">
@@ -89,40 +112,40 @@
                 className: 'custom-cluster-icon',
                 iconSize: L.point(iconSize[0], iconSize[1])
             });
-    
+
             return icon;
         }
-    
+
         // Create marker cluster groups with the custom icon creation function
         var groupesLayer = L.markerClusterGroup({
-            spiderfyOnMaxZoom: true,
+            spiderfyOnMaxZoom: false,
             showCoverageOnHover: true,
             zoomToBoundsOnClick: true,
             iconCreateFunction: createCustomClusterIcon
         });
-    
+
         var initiativesLayer = L.markerClusterGroup({
-            spiderfyOnMaxZoom: true,
+            spiderfyOnMaxZoom: false,
             showCoverageOnHover: true,
             zoomToBoundsOnClick: true,
             iconCreateFunction: createCustomClusterIcon
         });
-    
+
         // Define custom icons for individual markers
         var customIconGL = L.icon({
-            iconUrl: 'static/images/icon_rs.png', // Update this path to your custom icon
-            iconSize: [32, 32], // Size of the icon
-            iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location
-            popupAnchor: [0, -32] // Point from which the popup should open relative to the iconAnchor
+            iconUrl: 'static/images/icon_rs.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
         });
-    
+
         var customIconSSA = L.icon({
-            iconUrl: 'static/images/icon_ssa.png', // Update this path to your custom icon
-            iconSize: [58, 32], // Size of the icon
-            iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location
-            popupAnchor: [0, -32] // Point from which the popup should open relative to the iconAnchor
+            iconUrl: 'static/images/icon_ssa.png',
+            iconSize: [58, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
         });
-    
+
         // Add markers for "Groupes locaux"
         groupes_locaux.forEach(function(gl) {
             var popupContent = '<b>' + gl.name + '</b><br>' +
@@ -131,11 +154,11 @@
                 '<b>Website:</b> <a href="' + gl.website + '" target="_blank">' + gl.website + '</a><br>' +
                 '<b>Phone:</b> ' + gl.phone + '<br>' +
                 '<p>' + gl.summary + '</p>';
-    
+
             L.marker([gl.lat, gl.lng], { icon: customIconGL }).addTo(groupesLayer)
                 .bindPopup(popupContent);
         });
-    
+
         // Add markers for "Initiatives locales SSA"
         initiatives_ssa.forEach(function(ssa) {
             var popupContent = '<b>' + ssa.name + '</b><br>' +
@@ -148,15 +171,15 @@
             '<b>Phone:</b> ' + ssa.phone + '<br>' +
             '<p>' + ssa.summary + '</p>' +
             '<b>URLs:</b><ul>' + ssa.URLs.map(url => '<li><a href="' + url + '" target="_blank">' + url + '</a></li>').join("") + '</ul>';
-    
+
             L.marker([ssa.lat, ssa.lng], { icon: customIconSSA }).addTo(initiativesLayer)
                 .bindPopup(popupContent);
         });
-    
+
         // Add the layers to the map
         groupesLayer.addTo(map);
         initiativesLayer.addTo(map);
-    
+
         // Toggle the visibility of the "Groupes locaux" layer
         document.getElementById('toggleGL').addEventListener('change', function(e) {
             if (this.checked) {
@@ -165,7 +188,7 @@
                 map.removeLayer(groupesLayer);
             }
         });
-    
+
         // Toggle the visibility of the "Initiatives locales SSA" layer
         document.getElementById('toggleSSA').addEventListener('change', function(e) {
             if (this.checked) {
@@ -174,7 +197,14 @@
                 map.removeLayer(initiativesLayer);
             }
         });
+
+        // Hide the warning message after 10 seconds
+        setTimeout(function() {
+            var warningElement = document.getElementById('map-warning');
+            if (warningElement) {
+                warningElement.style.display = 'none';
+            }
+        }, 5000);
     </script>
-    
 </body>
 </html>
